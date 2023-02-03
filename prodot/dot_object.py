@@ -10,7 +10,6 @@ class DotObject:
         return str(self.main_object)
 
     def __getattr__(self, name: str) -> t.Any:
-        breakpoint()
         if name in self.main_object:
             return DotObject(self.main_object[name])
         else:
