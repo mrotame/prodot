@@ -2,10 +2,10 @@ from __future__ import annotations
 import typing as t
 from .pro_object import ProObject
 
-class DictClass(ProObject):
+class DictObject(ProObject):
     arrayTypes = [list]
 
-    def __getattr__(self, name: str) -> DictClass:
+    def __getattr__(self, name: str) -> DictObject:
         if type(self.main_object) in self.arrayTypes:
             return self._get_array(name)
         return self._get_map(name)
@@ -21,16 +21,16 @@ class DictClass(ProObject):
         self._set_map(name, value)
             
 
-    def _get_map(self, name:str) -> DictClass:
+    def _get_map(self, name:str) -> DictObject:
         if name in self.main_object:
-            return DictClass(self.main_object[name])
+            return DictObject(self.main_object[name])
         else:
             raise Exception(f"Key doesn't exist in DotObject {self.true_repr()}")
 
-    def _get_array(self, name:str) -> DictClass:
+    def _get_array(self, name:str) -> DictObject:
         name = name.replace('n','')
         try:
-            return DictClass(self.main_object[int(name)])
+            return DictObject(self.main_object[int(name)])
         except IndexError:
             raise Exception(f"Array index doesn't exist in DotObject {self.true_repr()}")
     

@@ -1,5 +1,5 @@
 import typing as t
-from .dict_class import DictClass
+from .dict_object import DictObject
 
-class DotObject(DictClass):
+class DotObject(DictObject):
     pass
