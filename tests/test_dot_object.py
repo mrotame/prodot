@@ -1,33 +1,17 @@
+from pytest import fixture
+import typing as t
 from prodot.dict_object import DictObject
 
 class TestDictObject:
-    user = {
-        "userData": {
-            "name": "John Doe",
-            "age":30,
-            "address": {
-                "street":"List Ave",
-                "number":551,
-                "city":"Pythonland",
-            }
-        },
-        "shoppingCart" : [
-            {
-                "productName":"notebook",
-                "price":"1499.99",
-                "id":12345
-            },
-            {
-                "productName":"hamtung smartphone",
-                "price":"899.99",
-                "id":12345
-            }
-        ]
-    }
+    @fixture(autouse=True)
+    def setup(self, user_info:t.Dict[str,any]):
+        self.user = user_info
 
-    user_dot = DictObject(user)
+    @property
+    def user_dot(self): 
+        return DictObject(self.user)
 
-    # ------------ Define data testing ------------
+    # ------------ Testing define data  ------------
     def test_set_new_string_and_validate_data(self):
         info = 100
         self.user_dot.new_info = info
@@ -56,7 +40,7 @@ class TestDictObject:
         self.user_dot.new_array.n0 = "da"
         assert self.user_dot.new_array.n0.get_value() == "da"
 
-    # ----------- Retrieve data testing -----------
+    # ----------- Testing retrieve data  -----------
 
     def test_check_if_dotObject_path_retrieve_correct_result(self):
         assert self.user_dot.userData.address.street.get_value() == self.user['userData']['address']['street']
