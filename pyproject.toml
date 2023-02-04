@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "prodot"
-version = "0.1.2"
+version = "0.1.3"
 description = ""
 authors = ["Matheus Menezes Almeida <mrotame@gmail.com>"]
 license = "GNU GENERAL PUBLIC LICENSE"
