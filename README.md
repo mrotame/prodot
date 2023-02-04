@@ -56,7 +56,7 @@ The ProObject will return another instance of the ProObject with the main_object
 <class 'prodot.pro_object.ProObject'>
 ```
 
-To get the brute value of the object, you can use the `.get_value()` function.
+To get the raw value of the object, you can use the `.get_value()` function.
 
 ```Python
 >>> shoppingCart.get_value()
