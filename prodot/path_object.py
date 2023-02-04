@@ -1,12 +1,13 @@
+from __future__ import annotations
 import typing as t
 from .pro_object import ProObject
 from jsonpath_ng.ext import parse
 
 class PathObject(ProObject):
 
-    def __getitem__(self, name:str)->t.Any:
+    def __getitem__(self, name:str)->PathObject:
         try:
-            return parse('$.'+name).find(self.main_object)[0].value
+            return PathObject(parse('$.'+name).find(self.main_object)[0].value)
         except IndexError:
             raise Exception(f"path <<{name}>> not found at the main_object")
 
