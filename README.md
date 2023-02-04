@@ -34,8 +34,8 @@ my_json = {
     "name": "John",
     "age": "38",
     "shoppingCart": [
-      {"cellphone": 999.99}
-      {"notebook": 2999.99}
+      {"cellphone": 999.99},
+      {"notebook": 2999.99},
       {"wireless keyboard": 299.99}
     ]
   }
@@ -44,4 +44,26 @@ my_json = {
 my_new_obj = DotObject(my_json)
 
 shoppingCart = my_new_obj.userData.shoppingCart
+```
+
+The DotObject will return another instance of the DotObject with the main_object attribute as being the selected path.
+
+```Python
+>>> type(shoppingCart)
+<class 'prodot.dot_object.DotObject'>
+```
+
+To get the brute value of the object, you can use the `.get_value()` function.
+
+```Python
+>>> shoppingCart.get_value()
+[{"cellphone": 999.99}, {"notebook": 2999.99}, {"wireless keyboard": 299.99}]
+
+# or by using the get_value directly at the path
+>>> my_new_obj.userData.shoppingCart.get_value()
+[{"cellphone": 999.99}, {"notebook": 2999.99}, {"wireless keyboard": 299.99}]
+
+>>> type(shoppingCart.get_value())
+<class 'dict'>
+
 ```
