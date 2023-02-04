@@ -24,9 +24,9 @@ class PathObject(BaseObject):
         if isinstance(dict_to_get_path, dict):
             for key, value in dict_to_get_path.items():
                 yield f'.{key}'
-                yield from (f'.{key}{p}' for p in self.all_paths_from_main_object(dict_to_get_path=value))
+                yield from (f'.{key}{p}' for p in self.get_all_paths(dict_to_get_path=value))
             
         elif isinstance(dict_to_get_path, list):
             for i, value in enumerate(dict_to_get_path):
                 yield f'[{i}]'
-                yield from (f'[{i}]{p}' for p in self.all_paths_from_main_object(dict_to_get_path=value))
+                yield from (f'[{i}]{p}' for p in self.get_all_paths(dict_to_get_path=value))

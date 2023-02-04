@@ -47,7 +47,7 @@ class TestPathObject:
         }
         myObject = PathObject(custom_dict)
 
-        assert list(myObject.all_paths_from_main_object()) == \
+        assert list(myObject.get_all_paths()) == \
             [
                 '.testing', '.foo', '.foo.bar', '.foo_array', 
                 '.foo_array[0]', '.foo_array[0].bar', 
