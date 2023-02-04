@@ -99,7 +99,7 @@ You can view all possible json_paths from object by using the `get_all_paths` at
 >>> my_new_obj.get_all_paths()
 <generator object PathObject.all_paths_from_main_object at 0x7f6a012b5c80>
 
-list(my_new_obj.get_all_paths())
+>>> list(my_new_obj.get_all_paths())
 ['.userData', '.userData.name', '.userData.age', '.userData.shoppingCart', '.userData.shoppingCart[0]', '.userData.shoppingCart[0].cellphone', '.userData.shoppingCart[1]', '.userData.shoppingCart[1].notebook', '.userData.shoppingCart[2]', '.userData.shoppingCart[2].wireless keyboard', '.userData.shoppingCart[3]', '.userData.shoppingCart[3].monitor', '.userData.shoppingCart[4]', '.userData.shoppingCart[4].FunStation 6 Series T']
 ```
 
