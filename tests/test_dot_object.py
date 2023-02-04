@@ -28,6 +28,7 @@ class TestDotObject:
 
     def test_set_new_list_and_check_information(self):
         self.user_dot.new_array = ["a","b","c'"]
+
         assert self.user_dot.new_array.n1.get_value() == "b"
 
     def test_set_new_list_add_new_value_and_check_information(self):
@@ -40,6 +41,10 @@ class TestDotObject:
         self.user_dot.new_array.n0 = "da"
         assert self.user_dot.new_array.n0.get_value() == "da"
 
+    def test_get_non_existent_full_path_and_create_one(self):
+        self.user_dot.non.existent.path = 10
+        assert self.user_dot.non.existent.path.get_value() == 10
+
     # ----------- Testing retrieve data  -----------
 
     def test_check_if_dotObject_path_retrieve_correct_result(self):
@@ -50,5 +55,6 @@ class TestDotObject:
 
     def test_check_if_dotObject_path_retrieve_list_index(self):
         assert self.user_dot.shoppingCart.n0.price.get_value() == self.user['shoppingCart'][0]['price']
-
+        
+        
     

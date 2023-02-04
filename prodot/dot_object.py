@@ -1,18 +1,29 @@
 from __future__ import annotations
 import typing as t
 from .base_object import BaseObject
+from jsonpath_ng import parse
 
 class DotObject(BaseObject):
     arrayTypes = [list]
+    numberIndexKey = 'n'
+    _temp_path = '$'
 
     def __getattr__(self, name: str) -> DotObject:
-        if type(self.main_object) in self.arrayTypes:
-            return self._get_array(name)
-        return self._get_map(name)
+            if type(self.main_object) in self.arrayTypes:
+                return self._get_array(name)
+            return self._get_map(name)
         
     def __setattr__(self, name: str, value: t.Any) -> None:
+        if name in dir(self):
+            return super().__setattr__(name, value)
+
         if name == 'main_object':
             self.__dict__[name] = value
+            return
+
+        if self._temp_path != '$':
+            name = f'{self._temp_path}.{name}'
+            parse(name).update_or_create(self.main_object, value)
             return
         
         if type(self.main_object) in self.arrayTypes:
@@ -24,11 +35,12 @@ class DotObject(BaseObject):
     def _get_map(self, name:str) -> DotObject:
         if name in self.main_object:
             return DotObject(self.main_object[name])
-        else:
-            raise Exception(f"Key doesn't exist in DotObject {self.true_repr()}")
+
+        self._temp_path += f'.{name}'
+        return self
 
     def _get_array(self, name:str) -> DotObject:
-        name = name.replace('n','')
+        name = name.replace(self.numberIndexKey,'')
         try:
             return DotObject(self.main_object[int(name)])
         except IndexError:
@@ -38,6 +50,6 @@ class DotObject(BaseObject):
         self.main_object[name] = value
 
     def _set_array(self, name:str, value:t.Any):
-        name = name.replace('n','')
+        name = name.replace(self.numberIndexKey,'')
         self.main_object.insert(int(name), value)
     
