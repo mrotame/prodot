@@ -9,24 +9,24 @@ pip install prodot
 
 ## Usage
 
-Import the dot object from the prodot library. You can create a new empty dictionary, or start with a filled one
+Import the pro object from the prodot library. You can create a new empty dictionary, or start with a filled one
 
 ```Python
-from prodot import DotObject
+from prodot import ProObject
 
 # No parameters instances an empty dictionary
-my_new_obj = DotObject() 
+my_new_obj = ProObject() 
 
-# The Dot Object can be initialized with a dictionary
-my_dict_obj = DotObject({"foo":["bar,"eggs"]})
+# The pro object can be initialized with a dictionary
+my_dict_obj = ProObject({"foo":["bar,"eggs"]})
 
-# The Dot Object can also initialize with a list
-my_list_obj = DotObject([ [1,2,3], ["a","b","c"], [{"foo":"bar"}, {"bar":"eggs"}] ])
+# The pro object can also initialize with a list
+my_list_obj = ProObject([ [1,2,3], ["a","b","c"], [{"foo":"bar"}, {"bar":"eggs"}] ])
 
 ```
 
 ### Dot notation usage
-By using the dot-object you can use the dictionary as a class
+By using the pro-object you can use the dictionary as a class
 ```Python
 
 my_json = {
@@ -41,16 +41,16 @@ my_json = {
   }
 }
 
-my_new_obj = DotObject(my_json)
+my_new_obj = ProObject(my_json)
 
 shoppingCart = my_new_obj.userData.shoppingCart
 ```
 
-The DotObject will return another instance of the DotObject with the main_object attribute as being the selected path.
+The ProObject will return another instance of the ProObject with the main_object attribute as being the selected path.
 
 ```Python
 >>> type(shoppingCart)
-<class 'prodot.dot_object.DotObject'>
+<class 'prodot.pro_object.ProObject'>
 ```
 
 To get the brute value of the object, you can use the `.get_value()` function.
