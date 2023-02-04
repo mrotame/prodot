@@ -15,7 +15,7 @@ class PathObject(BaseObject):
         path = parse('$.'+name)
         path.update_or_create(self.main_object, value)
 
-    def all_paths_from_main_object(self, **kwargs)->t.Iterable:
+    def get_all_paths(self, **kwargs)->t.Iterable:
         if not kwargs.get('dict_to_get_path', dict()):
             dict_to_get_path = self.main_object
         else:
