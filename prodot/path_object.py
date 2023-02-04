@@ -1,9 +1,9 @@
 from __future__ import annotations
 import typing as t
-from .pro_object import ProObject
+from .base_object import BaseObject
 from jsonpath_ng.ext import parse
 
-class PathObject(ProObject):
+class PathObject(BaseObject):
 
     def __getitem__(self, name:str)->PathObject:
         try:

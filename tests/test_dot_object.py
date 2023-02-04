@@ -1,15 +1,15 @@
 from pytest import fixture
 import typing as t
-from prodot.dict_object import DictObject
+from prodot.dot_object import DotObject
 
-class TestDictObject:
+class TestDotObject:
     @fixture(autouse=True)
     def setup(self, user_info:t.Dict[str,any]):
         self.user = user_info
 
     @property
     def user_dot(self): 
-        return DictObject(self.user)
+        return DotObject(self.user)
 
     # ------------ Testing define data  ------------
     def test_set_new_string_and_validate_data(self):
