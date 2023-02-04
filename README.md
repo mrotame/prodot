@@ -65,5 +65,15 @@ To get the brute value of the object, you can use the `.get_value()` function.
 
 >>> type(shoppingCart.get_value())
 <class 'dict'>
-
 ```
+
+You can also add new information to the instancied object
+
+```Python
+# n3 means list index 3 (will be added as 4th item)
+>>> my_new_obj.userData.shoppingCart.n3 = {"monitor": 699.99}
+>>> my_new_obj.userData.shoppingCart.get_value()
+[{"cellphone": 999.99}, {"notebook": 2999.99}, {"wireless keyboard": 299.99}, {"monitor": 699.99}]
+```
+Python doesn't accept list indexes to be used as a class attribute. For solve this problem, list indexes start with the `n` letter (like n0, n1, ...)
+
