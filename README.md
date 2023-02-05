@@ -2,6 +2,16 @@
 
 A new way to deal with dictionaries and lists in python.
 Treat data like classes, or by reading/writing data with json paths
+```Python
+>>> from prodot import ProObject
+>>> my_obj = ProObject({'foo':{'bar':['eggs']}})
+
+>>> my_obj.foo.bar.n1.get_value()
+'eggs'
+
+>>> my_obj['$.foo.bar.[0]'].get_value()
+'eggs
+```
 
 # Getting started
 
@@ -15,16 +25,14 @@ pip install prodot
 Import the pro object from the prodot library. You can create a new empty dictionary, or start with a filled one
 
 ```Python
-from prodot import ProObject
-
 # No parameters instances an empty dictionary
-my_new_obj = ProObject() 
+>>> my_new_obj = ProObject() 
 
 # The pro object can be initialized with a dictionary
-my_dict_obj = ProObject({"foo":["bar,"eggs"]})
+>>> my_dict_obj = ProObject({"foo":["bar","eggs"]})
 
 # The pro object can also initialize with a list
-my_list_obj = ProObject([ [1,2,3], ["a","b","c"], [{"foo":"bar"}, {"bar":"eggs"}] ])
+>>> my_list_obj = ProObject([ [1,2,3], ["a","b","c"], [{"foo":"bar"}, {"bar":"eggs"}] ])
 
 ```
 
@@ -32,21 +40,21 @@ my_list_obj = ProObject([ [1,2,3], ["a","b","c"], [{"foo":"bar"}, {"bar":"eggs"}
 By using the pro-object you can use the dictionary as a class
 
 ```Python
-my_json = {
-  "userData": {
-    "name": "John",
-    "age": "38",
-    "shoppingCart": [
-      {"cellphone": 999.99},
-      {"notebook": 2999.99},
-      {"wireless keyboard": 299.99}
-    ]
-  }
-}
+>>> my_json = {
+...     "userData": {
+...         "name": "John",
+...         "age": "38",
+...         "shoppingCart":[
+...             {"cellphone": 999.99},
+...             {"notebook": 2999.99},
+...             {"wireless keyboard": 299.99}
+...         ]
+...     }
+... }
 
-my_new_obj = ProObject(my_json)
+>>> my_new_obj = ProObject(my_json)
 
-shoppingCart = my_new_obj.userData.shoppingCart
+>>> shoppingCart = my_new_obj.userData.shoppingCart
 ```
 
 The ProObject will return another instance of the ProObject with the main_object attribute as being the selected path.
