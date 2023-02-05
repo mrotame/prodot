@@ -42,8 +42,8 @@ class TestDotObject:
         assert self.user_dot.new_array.n0.get_value() == "da"
 
     def test_get_non_existent_full_path_and_create_one(self):
-        self.user_dot.non.existent.path = 10
-        assert self.user_dot.non.existent.path.get_value() == 10
+        self.user_dot.non.existent.path.n0 = 10
+        assert self.user_dot.non.existent.path.get_value() == [10]
 
     # ----------- Testing retrieve data  -----------
 

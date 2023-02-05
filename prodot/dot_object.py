@@ -22,8 +22,10 @@ class DotObject(BaseObject):
             return
 
         if self._temp_path != '$':
-            name = f'{self._temp_path}.{name}'
-            parse(name).update_or_create(self.main_object, value)
+
+            json_path = self.__treat_path(f'{self._temp_path}.{name}')
+
+            parse(json_path).update_or_create(self.main_object, value)
             return
         
         if type(self.main_object) in self.arrayTypes:
@@ -52,4 +54,15 @@ class DotObject(BaseObject):
     def _set_array(self, name:str, value:t.Any):
         name = name.replace(self.numberIndexKey,'')
         self.main_object.insert(int(name), value)
+
+    def __treat_path(self, path):
+        path_list = []
+        for i in path.split('.'):
+            if i[0] == 'n' and i[1:].isnumeric():
+                path_list.append(f'[{i[1:]}]')
+            else:
+                path_list.append(i)
+
+        return '.'.join(path_list)
+
     
