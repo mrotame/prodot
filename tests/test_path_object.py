@@ -1,6 +1,6 @@
 import typing as t
 from pytest import fixture
-from prodot.path_object import PathObject
+from prodot._path_object import PathObject
 
 class TestPathObject:
     @fixture(autouse=True)

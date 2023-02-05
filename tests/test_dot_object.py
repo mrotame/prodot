@@ -1,6 +1,6 @@
 from pytest import fixture
 import typing as t
-from prodot.dot_object import DotObject
+from prodot._dot_object import DotObject
 
 class TestDotObject:
     @fixture(autouse=True)

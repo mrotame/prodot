@@ -1,6 +1,6 @@
 import typing as t
 from pytest import fixture
-from prodot.pro_object import ProObject
+from prodot._pro_object import ProObject
 
 from .test_dot_object import TestDotObject
 from .test_path_object import TestPathObject

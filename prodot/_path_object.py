@@ -1,6 +1,6 @@
 from __future__ import annotations
 import typing as t
-from .base_object import BaseObject
+from ._base_object import BaseObject
 from jsonpath_ng.ext import parse
 
 class PathObject(BaseObject):
