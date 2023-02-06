@@ -1,6 +1,7 @@
 import typing as t
 from pytest import fixture
 from prodot._path_object import PathObject
+from jsonpath_ng import parse
 
 class TestPathObject:
     @fixture(autouse=True)
@@ -28,6 +29,15 @@ class TestPathObject:
         self.user_path['super.test.creating.multiples.dict.levels'] = "it workds"
         assert self.user_path['super']['test']['creating']['multiples']['dict']['levels'].get_value() == "it workds"
 
+    def test_update_filtered_object_and_check_its_value(self):
+        self.user_path.filter.path_contains('price').update_all('999.99')
+
+        for path in self.user_path.get_all_paths():
+            if 'price' not in path:
+                continue
+            object = parse(path).find(self.user_path.get_value())[0]
+            assert object.value == '999.99'
+
     # ----------- Testing retrieve data  -----------
 
     def test_get_simple_data_from_dict(self):
@@ -46,10 +56,10 @@ class TestPathObject:
             "foo_array" : [{"bar":"eggs"},{"foo":"bar"}]
         }
         myObject = PathObject(custom_dict)
-
+    
         assert list(myObject.get_all_paths()) == \
             [
-                '.testing', '.foo', '.foo.bar', '.foo_array', 
-                '.foo_array[0]', '.foo_array[0].bar', 
-                '.foo_array[1]', '.foo_array[1].foo'
+                '$.testing', '$.foo', '$.foo.bar', '$.foo_array', 
+                '$.foo_array[0]', '$.foo_array[0].bar', 
+                '$.foo_array[1]', '$.foo_array[1].foo'
             ]
