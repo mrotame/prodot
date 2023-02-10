@@ -4,6 +4,17 @@ from ._base_object import BaseObject
 from jsonpath_ng import parse
 
 class DotObject(BaseObject):
+    '''
+    ## Description
+    The dot object gives the maps and arrays more power
+    by let you treat the object like a common class.
+    All values can be accessed by this method.
+
+
+    ## Parameters
+    `main_object:` a Dict or List object that will be interpreted
+    by the children objects
+    '''
     arrayTypes = [list]
     numberIndexKey = 'n'
     _temp_path = '$'
@@ -42,6 +53,7 @@ class DotObject(BaseObject):
         return self
 
     def _get_array(self, name:str) -> DotObject:
+
         name = name.replace(self.numberIndexKey,'')
         try:
             return DotObject(self.main_object[int(name)])
