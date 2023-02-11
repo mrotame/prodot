@@ -64,9 +64,8 @@ class FilteredObject:
         for path in self.filtered_paths:
             path = parse(path)
             path.update_or_create(self.cls.main_object, value)
-        return self.get_object
+        return self.get_object()
 
-    @property
     def get_object(self):
         '''
         Returns the original BaseObject children Object
@@ -74,7 +73,6 @@ class FilteredObject:
         '''
         return self.cls
 
-    @property
     def get_filteredObject(self):
         '''
         Returns the original BaseObject children Object with

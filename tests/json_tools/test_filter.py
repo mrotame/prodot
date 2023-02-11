@@ -25,7 +25,7 @@ class TestFilter:
     def test_find_all_paths_with_productName_on_path_and_get_only_filtered_object(self):
         filtered_product_name = Filter(self.user_path.main_object, self.user_path).path_contains('productName')
 
-        assert filtered_product_name.get_filteredObject.get_value() == {
+        assert filtered_product_name.get_filteredObject().get_value() == {
             "shoppingCart" : [{"productName":"notebook",},
             {"productName":"hamtung smartphone",}]}
 
