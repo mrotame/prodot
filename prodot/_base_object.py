@@ -15,7 +15,7 @@ class BaseObject(ABC):
         The main object is the object that the class will be representing (most times, it will be a list or a dictionary)
         '''
     
-    def __init__(self, main_object: t.Dict | t.List | None = dict()):
+    def __init__(self, main_object: t.Union[t.Dict, t.List, None] = dict()):
         '''
         the init will receive the main object as parameter, 
         or will create an initialize with an empty dictionary
