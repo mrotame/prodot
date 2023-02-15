@@ -59,7 +59,7 @@ class TestPathObject:
     
         assert list(myObject.get_all_paths()) == \
             [
-                '$.testing', '$.foo', '$.foo.bar', '$.foo_array', 
-                '$.foo_array[0]', '$.foo_array[0].bar', 
-                '$.foo_array[1]', '$.foo_array[1].foo'
+                '$."testing"', '$."foo"', '$."foo"."bar"', '$."foo_array"', 
+                '$."foo_array"[0]', '$."foo_array"[0]."bar"', 
+                '$."foo_array"[1]', '$."foo_array"[1]."foo"'
             ]

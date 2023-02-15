@@ -34,8 +34,8 @@ class Filter:
         filtered_paths = []
         for path in get_all_paths(self.json):
             if string_to_search in path:
-                path = path.replace(string_to_search, f'"{string_to_search}"')
                 filtered_paths.append(path)
+                
                 path = parse(path)
                 path.update_or_create(filtered_json, path.find(self.json)[0].value)
                 

@@ -29,6 +29,9 @@ class TestFilter:
             "shoppingCart" : [{"productName":"notebook",},
             {"productName":"hamtung smartphone",}]}
 
+    def test_find_all_paths_with_additionalInformation_on_it(self):
+        filtered_product_name = Filter(self.user_path.main_object, self.user_path).path_contains('additionalInformation')
+
     def test_find_all_paths_with_productName_on_path_and_update_its_value(self):
         filtered_product_name = Filter(self.user_path.main_object, self.user_path).path_contains('productName').update_all("123")
 

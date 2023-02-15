@@ -11,7 +11,11 @@ def user_info():
                 "street":"List Ave",
                 "number":551,
                 "city":"Pythonland",
+            },
+            "additionalInformation": {
+                "important.information": True
             }
+            
         },
         "shoppingCart" : [
             {
