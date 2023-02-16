@@ -30,7 +30,7 @@ class TestPathObject:
         assert self.user_path['super']['test']['creating']['multiples']['dict']['levels'].get_value() == "it workds"
 
     def test_update_filtered_object_and_check_its_value(self):
-        self.user_path.filter.path_contains('price').update_all('999.99')
+        self.user_path.filter.by_path.contains('price').update_all('999.99')
 
         for path in self.user_path.get_all_paths():
             if 'price' not in path:
