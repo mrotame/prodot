@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import typing as t
 from ._filter_byPath import FilterByPath
-
+from ._filter_byValue import FilterByValue
 class Filter:
     '''
     ## Description
@@ -19,10 +19,15 @@ class Filter:
         self.json = json
         self.cls = cls
         self.__filterByPath = FilterByPath
+        self.__filterByValue = FilterByValue
 
     @property
     def by_path(self):
         return self.__filterByPath(self.json, self.cls)
+    
+    @property
+    def by_value(self):
+        return self.__filterByValue(self.json, self.cls)
 
     
  

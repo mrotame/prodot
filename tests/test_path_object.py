@@ -31,7 +31,7 @@ class TestPathObject:
 
     def test_update_filtered_object_and_check_its_value(self):
         self.user_path.filter.by_path.contains('price').update_all('999.99')
-
+        
         for path in self.user_path.get_all_paths():
             if 'price' not in path:
                 continue

@@ -1,5 +1,5 @@
 from jsonpath_ng import parse
-
+from copy import deepcopy
 
 
 class FilteredObject:
@@ -12,15 +12,14 @@ class FilteredObject:
         self.cls = cls
         self.filtered_json = json
         self.filtered_paths = filtered_paths
-        self.filtered_keys = [i.value for path in filtered_paths for i in parse(path).find(json)]
+        self.filtered_values = [i.value for path in filtered_paths for i in parse(path).find(json)]
 
     def update_all(self, value):
         '''
         Update all filtered data to a new value
         '''
         for path in self.filtered_paths:
-            path = parse(path)
-            path.update_or_create(self.cls.main_object, value)
+            self.cls[path] = deepcopy(value)
         return self.get_object()
 
     def get_object(self):

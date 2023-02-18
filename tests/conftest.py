@@ -6,6 +6,7 @@ def user_info():
         "unique_info": "right info",
         "userData": {
             "name": "John Doe",
+            "account_active": True,
             "age":30,
             "address": {
                 "street":"List Ave",

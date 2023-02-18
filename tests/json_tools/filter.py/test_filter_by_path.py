@@ -5,7 +5,7 @@ from prodot import PathObject
 from prodot.json_tools._filter import FilteredObject
 from jsonpath_ng import parse
 
-class TestFilter:
+class TestFilterByPath:
     @fixture(autouse=True)
     def setup(self, user_info:t.Dict[str,any]):
         self.user = user_info
@@ -18,7 +18,7 @@ class TestFilter:
         filtered_dict = Filter(self.user).by_path.contains('shoppingCart')
         assert isinstance(filtered_dict, dict)
 
-    def test_filter_return_FilteredObject_object_when_filtered_without_class(self):
+    def test_filter_return_FilteredObject_object_when_filtered_with_class(self):
         filtered_dict = Filter(self.user, self.user_path).by_path.contains('shoppingCart')
         assert isinstance(filtered_dict, FilteredObject)
 
@@ -31,6 +31,7 @@ class TestFilter:
 
     def test_find_all_paths_with_additionalInformation_on_it(self):
         filtered_product_name = Filter(self.user_path.main_object, self.user_path).by_path.contains('additionalInformation')
+        assert filtered_product_name.filtered_json == {'userData': {'additionalInformation': {'important.information': True}}}
 
     def test_find_all_paths_with_productName_on_path_and_update_its_value(self):
         filtered_product_name = Filter(self.user_path.main_object, self.user_path).by_path.contains('productName').update_all("123")
@@ -47,7 +48,9 @@ class TestFilter:
 
     def test_find_one_path_that_ends_with_shopping_cart_and_check_filtered_keys(self):
         filtered_product_name = Filter(self.user_path.main_object, self.user_path).by_path.endswith('shoppingCart')
-        assert filtered_product_name.filtered_keys == [self.user['shoppingCart']]
+        assert filtered_product_name.filtered_values == [self.user['shoppingCart']]
+
+        
 
 
 

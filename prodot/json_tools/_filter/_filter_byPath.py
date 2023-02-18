@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import typing as t
 from .. import get_all_paths
 from jsonpath_ng import parse
