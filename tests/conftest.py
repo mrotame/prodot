@@ -1,3 +1,4 @@
+from prodot._base_object import BaseObject
 from pytest import fixture
 
 @fixture
@@ -31,3 +32,7 @@ def user_info():
             }
         ]
     }
+
+
+def update_main_object_string(baseObject:BaseObject):
+    baseObject.main_object = 'updated_by_external_function'

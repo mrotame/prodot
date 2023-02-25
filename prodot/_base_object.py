@@ -19,6 +19,13 @@ class BaseObject(ABC):
 
     @property
     def scoped(self):
+        '''
+        Return the Object as a temporary object to be used within a scope. Ex:
+        ```Python
+        >> with my_obj.scoped as temp_object:
+        >> ... print( temp_object.get_value() )
+        ```
+        '''
         class Scope:
             def __init__(self, caller: BaseObject, main_object:t.Any):
                 self.caller = caller
