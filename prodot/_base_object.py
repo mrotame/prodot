@@ -1,5 +1,8 @@
 import typing as t
 from abc import ABC
+import copy
+from contextvars import ContextVar
+
 class BaseObject(ABC):
     '''
     ## Description
@@ -9,12 +12,26 @@ class BaseObject(ABC):
     `main_object:` a Dict or List object that will be interpreted
     by the children objects
     '''
- 
-    def main_object(self)-> t.Any:
-        '''
-        The main object is the object that the class will be representing (most times, it will be a list or a dictionary)
-        '''
     
+    
+    '''The main object is the object that the class will be representing (most times, it will be a list or a dictionary)'''   
+    main_object: t.Any
+
+    @property
+    def scoped(self):
+        class Scope:
+            def __init__(self, caller: BaseObject, main_object:t.Any):
+                self.caller = caller
+                self.main_object = main_object
+
+            def __enter__(self):
+                return copy.deepcopy(self.caller.__class__(self.main_object))
+                
+            def __exit__(self, exc_type, exc_value, traceback):
+                pass
+
+        return Scope(self, self.main_object)
+
     def __init__(self, main_object: t.Union[t.Dict, t.List, None] = dict()):
         '''
         the init will receive the main object as parameter, 
