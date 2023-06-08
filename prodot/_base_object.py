@@ -39,12 +39,10 @@ class BaseObject(ABC):
 
         return Scope(self, self.main_object)
 
-    # @abstractmethod
-    def __contains__(self, name: str):
-        try:
-            return self.__getitem__(str(name))
-        except:
-            return False
+    def __contains__(self, value: str)-> t.Any:
+        if value in self.main_object:
+            return True
+        return False
 
     def __init__(self, main_object: t.Union[t.Dict, t.List, None] = dict()):
         '''
@@ -56,9 +54,6 @@ class BaseObject(ABC):
     def __repr__(self) -> t.Dict:
         return str(self.main_object)
     
-    
-        
-
     def true_repr(self)-> str:
         '''
         returns the original representation of the base
