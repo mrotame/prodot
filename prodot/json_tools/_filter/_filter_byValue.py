@@ -22,7 +22,7 @@ class FilterByValue:
         '''
         
         for path in get_all_paths(self.json):
-            value = self.pathObject(self.json)[path].get_value()
+            value = self.pathObject(self.json)[path]
             
             try: str_to_search in value
             except Exception: value = str(value)
@@ -40,7 +40,7 @@ class FilterByValue:
         containing all the possible json paths that the data_to_search matches exactly the value
         '''
         for path in get_all_paths(self.json):
-            value = self.pathObject(self.json)[path].get_value()
+            value = self.pathObject(self.json)[path]
             try: data_to_search in value
             except Exception: value = str(value)
             if str(data_to_search) == value:

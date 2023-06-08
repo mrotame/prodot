@@ -19,10 +19,15 @@ class DotObject(BaseObject):
     numberIndexKey = 'n'
     _temp_path = '$'
 
-    def __getattr__(self, name: str) -> DotObject:
+    def __getattr__(self, name: str) -> t.Self:
         if type(self.main_object) in self.arrayTypes:
-            return self._get_array(name)
-        return self._get_map(name)
+            res = self._get_array(name)
+        else:
+            res = self._get_map(name)
+
+        if isinstance(res, list) or isinstance(res, dict):
+            return self.__class__(res)
+        return res
         
     def __setattr__(self, name: str, value: t.Any) -> None:
         if name in dir(self):
@@ -44,19 +49,17 @@ class DotObject(BaseObject):
             return
         self._set_map(name, value)
             
-    def _get_map(self, name:str) -> DotObject:
+    def _get_map(self, name:str) -> t.Any:
         if name in self.main_object:
-            return DotObject(self.main_object[name])
+            return self.main_object[name]
 
-        raise ValueError(f"path <<{name}>> not found in  the main_object")
-        # self._temp_path += f'.{name}'
-        # return self
+        raise ValueError(f"Key <<{name}>> not found in  the main_object")
 
-    def _get_array(self, name:str) -> DotObject:         
+    def _get_array(self, name:str) -> t.Any:    
         if name.startswith(self.numberIndexKey):
             name = name.replace(self.numberIndexKey,'')
         try:
-            return DotObject(self.main_object[int(name)])
+            return self.main_object[int(name)]
         except IndexError:
             raise Exception(f"Array index doesn't exist in DotObject {self.true_repr()}")
     

@@ -34,9 +34,13 @@ class PathObject(BaseObject):
         '''
         return self.__filter_object(self.main_object, self)
         
-    def __getitem__(self, name:str)->PathObject:
+    def __getitem__(self, name:str)->t.Self:
         try:
-            return PathObject(parse('$.'+name).find(self.main_object)[0].value)
+            res = parse('$.'+name).find(self.main_object)[0].value
+            if isinstance(res, list) or isinstance(res, dict):
+                return self.__class__(res)
+            return res
+    
         except IndexError:
             raise IndexError(f"path <<{name}>> not found in  the main_object")
 

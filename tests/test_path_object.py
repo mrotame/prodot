@@ -15,19 +15,19 @@ class TestPathObject:
     # ------------ Testing define data  ------------
     def test_set_simple_data_as_dict(self):
         self.user_path['testing'] = '123'
-        assert self.user_path['testing'].get_value() == '123'
+        assert self.user_path['testing'] == '123'
 
     def test_set_data_from_path_as_dict(self):
         self.user_path['userData.address.extraInfo'] = 'under the stairs'
-        assert self.user_path['userData']['address']['extraInfo'].get_value() == 'under the stairs'
+        assert self.user_path['userData']['address']['extraInfo'] == 'under the stairs'
 
     def test_set_data_from_path_with_attributes_as_dict(self):
         self.user_path['$.userData.address.extraInfo'] = 'under the stairs'
-        assert self.user_path['userData']['address']['extraInfo'].get_value() == 'under the stairs'
+        assert self.user_path['userData']['address']['extraInfo'] == 'under the stairs'
 
     def test_set_multiple_data_levels_from_path_with_attributes_as_dict(self):
         self.user_path['super.test.creating.multiples.dict.levels'] = "it workds"
-        assert self.user_path['super']['test']['creating']['multiples']['dict']['levels'].get_value() == "it workds"
+        assert self.user_path['super']['test']['creating']['multiples']['dict']['levels'] == "it workds"
 
     def test_update_filtered_object_and_check_its_value(self):
         self.user_path.filter.by_path.contains('price').update_all('999.99')
@@ -52,13 +52,13 @@ class TestPathObject:
         assert ('foo' not in self.user_path) == True
 
     def test_get_simple_data_from_dict(self):
-        assert self.user_path['unique_info'].get_value() == "right info"
+        assert self.user_path['unique_info'] == "right info"
 
     def test_get_data_from_dict_using_jsonpath(self):
-        assert self.user_path['userData.address.number'].get_value() == 551
+        assert self.user_path['userData.address.number'] == 551
 
     def test_get_data_from_dict_using_jsonpath_attributes(self):
-        assert self.user_path['$.userData.address.number'].get_value() == 551
+        assert self.user_path['$.userData.address.number'] == 551
 
     def test_get_all_json_paths_from_dict(self):
         custom_dict = {
