@@ -25,7 +25,7 @@ class TestBaseObject:
         myObject = BaseObject(item_list)
         c = 0
         for letter in myObject:
-            assert letter in item_list
+            assert letter == item_list[c]
             c += 1
 
         assert c == len(item_list)
