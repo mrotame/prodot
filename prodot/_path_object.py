@@ -38,7 +38,7 @@ class PathObject(BaseObject):
         try:
             return PathObject(parse('$.'+name).find(self.main_object)[0].value)
         except IndexError:
-            raise Exception(f"path <<{name}>> not found at the main_object")
+            raise IndexError(f"path <<{name}>> not found in  the main_object")
 
     def __setitem__(self, name:str, value:t.Any):
         path = parse('$.'+name)

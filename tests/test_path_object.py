@@ -40,6 +40,12 @@ class TestPathObject:
 
     # ----------- Testing retrieve data  -----------
 
+    def test_check_key_in_object(self):
+        assert "unique_info" in self.user_path
+
+    def test_check_undefined_key_in_object(self):
+        assert 'foo' not in self.user_path
+
     def test_get_simple_data_from_dict(self):
         assert self.user_path['unique_info'].get_value() == "right info"
 

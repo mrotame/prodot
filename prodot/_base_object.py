@@ -1,5 +1,5 @@
 import typing as t
-from abc import ABC
+from abc import ABC, abstractmethod
 import copy
 from contextvars import ContextVar
 
@@ -39,6 +39,13 @@ class BaseObject(ABC):
 
         return Scope(self, self.main_object)
 
+    # @abstractmethod
+    def __contains__(self, name: str):
+        try:
+            return self.__getitem__(str(name))
+        except:
+            return False
+
     def __init__(self, main_object: t.Union[t.Dict, t.List, None] = dict()):
         '''
         the init will receive the main object as parameter, 
@@ -49,6 +56,9 @@ class BaseObject(ABC):
     def __repr__(self) -> t.Dict:
         return str(self.main_object)
     
+    
+        
+
     def true_repr(self)-> str:
         '''
         returns the original representation of the base
@@ -67,3 +77,4 @@ class BaseObject(ABC):
         returns the content inside of the main_object
         '''
         return self.main_object
+    
