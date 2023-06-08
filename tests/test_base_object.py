@@ -19,3 +19,20 @@ class TestBaseObject:
         myObject = BaseObject('hello')
         update_main_object_string(myObject)
         assert myObject.main_object == 'updated_by_external_function'
+
+    def test_list_next_iter(self):
+        item_list = ['a','b','c']
+        myObject = BaseObject(item_list)
+        c = 0
+        for letter in myObject:
+            assert letter in item_list
+            c += 1
+
+        assert c == len(item_list)
+
+    def test_dict_next_iter(self):
+        item_list = {'a':10,'b':45,'c':65}
+        myObject = BaseObject(item_list)
+
+        for letter in myObject:
+            assert item_list[letter] == myObject.main_object[letter]

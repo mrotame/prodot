@@ -81,3 +81,6 @@ class BaseObject(ABC):
         Append the value if the main_object is a list
         '''
         return self.main_object.append(value)
+    
+    def __iter__(self):
+        return iter(self.main_object)
