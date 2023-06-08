@@ -46,7 +46,7 @@ class BaseObject(ABC):
 
     def __init__(self, main_object: t.Union[t.Dict, t.List, None] = dict()):
         '''
-        the init will receive the main object as parameter, 
+        The init will receive the main object as parameter, 
         or will create an initialize with an empty dictionary
         '''
         self.main_object = main_object
@@ -67,9 +67,17 @@ class BaseObject(ABC):
     def __str__(self)-> str:
         return str(self.main_object)
 
+    def __eq__(self, __value: object) -> bool:
+        return __value == self.main_object
+
     def get_value(self):
         '''
-        returns the content inside of the main_object
+        Returns the content inside of the main_object
         '''
         return self.main_object
     
+    def append(self, value: t.Any):
+        '''
+        Append the value if the main_object is a list
+        '''
+        return self.main_object.append(value)

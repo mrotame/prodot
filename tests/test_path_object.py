@@ -38,6 +38,11 @@ class TestPathObject:
             object = parse(path).find(self.user_path.get_value())[0]
             assert object.value == '999.99'
 
+    def test_append_data_to_list_type_PathObject(self):
+        self.user_path['list'] = []
+        self.user_path['list'].append('test')
+        assert self.user_path['list'].get_value() == ['test']
+
     # ----------- Testing retrieve data  -----------
 
     def test_assert_key_in_object(self):
@@ -69,3 +74,8 @@ class TestPathObject:
                 '$."foo_array"[0]', '$."foo_array"[0]."bar"', 
                 '$."foo_array"[1]', '$."foo_array"[1]."foo"'
             ]
+        
+    def test_append_data_to_list_type_PathObject(self):
+        self.user_path['list'] = []
+        self.user_path['list'].append('test')
+        assert self.user_path['list'] == PathObject(['test'])

@@ -20,9 +20,9 @@ class DotObject(BaseObject):
     _temp_path = '$'
 
     def __getattr__(self, name: str) -> DotObject:
-            if type(self.main_object) in self.arrayTypes:
-                return self._get_array(name)
-            return self._get_map(name)
+        if type(self.main_object) in self.arrayTypes:
+            return self._get_array(name)
+        return self._get_map(name)
         
     def __setattr__(self, name: str, value: t.Any) -> None:
         if name in dir(self):
@@ -44,17 +44,17 @@ class DotObject(BaseObject):
             return
         self._set_map(name, value)
             
-
     def _get_map(self, name:str) -> DotObject:
         if name in self.main_object:
             return DotObject(self.main_object[name])
 
-        self._temp_path += f'.{name}'
-        return self
+        raise ValueError(f"path <<{name}>> not found in  the main_object")
+        # self._temp_path += f'.{name}'
+        # return self
 
-    def _get_array(self, name:str) -> DotObject:
-
-        name = name.replace(self.numberIndexKey,'')
+    def _get_array(self, name:str) -> DotObject:         
+        if name.startswith(self.numberIndexKey):
+            name = name.replace(self.numberIndexKey,'')
         try:
             return DotObject(self.main_object[int(name)])
         except IndexError:
