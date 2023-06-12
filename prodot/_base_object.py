@@ -44,12 +44,17 @@ class BaseObject(ABC):
             return True
         return False
 
-    def __init__(self, main_object: t.Union[t.Dict, t.List, None] = dict()):
+    def __init__(self, main_object: t.Union[t.Dict, t.List, None] = {}, *args, **kwargs):
         '''
         The init will receive the main object as parameter, 
         or will create an initialize with an empty dictionary
         '''
-        self.main_object = main_object
+        if main_object or kwargs.get('maintain'):
+            self.main_object = main_object
+        elif isinstance(main_object, list):
+            self.main_object = list()
+        else:
+            self.main_object = dict()
 
     def __repr__(self) -> t.Dict:
         return str(self.main_object)

@@ -17,3 +17,7 @@ class TestProObject(TestDotObject, TestPathObject):
     @property
     def user_path(self): 
         return ProObject(self.user)
+    
+    @property
+    def object(self):
+        return ProObject

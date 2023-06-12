@@ -17,7 +17,6 @@ class DotObject(BaseObject):
     '''
     arrayTypes = [list]
     numberIndexKey = 'n'
-    _temp_path = '$'
 
     def __getattr__(self, name: str) -> t.Self:
         if type(self.main_object) in self.arrayTypes:
@@ -26,7 +25,7 @@ class DotObject(BaseObject):
             res = self._get_map(name)
 
         if isinstance(res, list) or isinstance(res, dict):
-            return self.__class__(res)
+            return self.__class__(res, maintain=True)
         return res
         
     def __setattr__(self, name: str, value: t.Any) -> None:
@@ -37,13 +36,6 @@ class DotObject(BaseObject):
             self.__dict__[name] = value
             return
 
-        if self._temp_path != '$':
-
-            json_path = self.__treat_path(f'{self._temp_path}.{name}')
-
-            parse(json_path).update_or_create(self.main_object, value)
-            return
-        
         if type(self.main_object) in self.arrayTypes:
             self._set_array(name, value)
             return

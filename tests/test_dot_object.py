@@ -10,6 +10,10 @@ class TestDotObject:
     @property
     def user_dot(self): 
         return DotObject(self.user)
+    
+    @property
+    def object(self):
+        return DotObject
 
     # ------------ Testing define data  ------------
     def test_set_new_string_and_validate_data(self):
@@ -28,22 +32,27 @@ class TestDotObject:
 
     def test_set_new_list_and_check_information(self):
         self.user_dot.new_array = ["a","b","c'"]
-        assert self.user_dot.new_array.n1 == "b"
+        assert self.user_dot.new_array.get_value()[1] == "b"
 
     def test_set_new_list_add_new_value_and_check_information(self):
         self.user_dot.new_array = ["a","b","c'"]
         self.user_dot.new_array.n3 = "d"
-        assert self.user_dot.new_array.n3 == "d"
+        assert self.user_dot.new_array.get_value()[3] == "d"
 
     def test_set_new_list_replace_value_and_check_information(self):
         self.user_dot.new_array = ["a","b","c'"]
         self.user_dot.new_array.n0 = "da"
-        assert self.user_dot.new_array.n0 == "da"
+        assert self.user_dot.new_array.get_value()[0] == "da"
 
     def test_append_data_to_list_type_dotObject(self):
         self.user_dot.list = []
         self.user_dot.list.append('test')
         assert self.user_dot.list == ['test']
+
+    def test_set_int_index_to_array_dot_object(self):
+        obj = DotObject([])
+        obj.n0 = True
+        assert obj.main_object[0]
 
     # ----------- Testing retrieve data  -----------
 
@@ -62,5 +71,9 @@ class TestDotObject:
 
         assert self.user_dot.list == DotObject(['test'])
         
-        
-    
+    def test_new_dot_object_does_not_return_existent_one(self):
+        new_object = self.object()
+        new_object.test = True
+        empty_object = self.object()
+
+        assert new_object != empty_object

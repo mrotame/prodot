@@ -11,6 +11,10 @@ class TestPathObject:
     @property
     def user_path(self): 
         return PathObject(self.user)
+    
+    @property
+    def object(self):
+        return PathObject
 
     # ------------ Testing define data  ------------
     def test_set_simple_data_as_dict(self):
@@ -42,6 +46,11 @@ class TestPathObject:
         self.user_path['list'] = []
         self.user_path['list'].append('test')
         assert self.user_path['list'].get_value() == ['test']
+
+    def test_create_path_object_with_num_as_key(self):
+        path = PathObject()
+        path[10] = True
+        assert path[10]
 
     # ----------- Testing retrieve data  -----------
 
@@ -79,3 +88,10 @@ class TestPathObject:
         self.user_path['list'] = []
         self.user_path['list'].append('test')
         assert self.user_path['list'] == PathObject(['test'])
+
+    def test_new_path_object_does_not_return_existent_one(self):
+        new_object = self.object()
+        new_object['test'] = True
+        empty_object = self.object()
+
+        assert new_object != empty_object

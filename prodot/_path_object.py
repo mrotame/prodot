@@ -36,15 +36,19 @@ class PathObject(BaseObject):
         
     def __getitem__(self, name:str)->t.Self:
         try:
+            if isinstance(name, int):
+                name = f'n{name}'
             res = parse('$.'+name).find(self.main_object)[0].value
             if isinstance(res, list) or isinstance(res, dict):
-                return self.__class__(res)
+                return self.__class__(res, maintain=True)
             return res
     
         except IndexError:
             raise IndexError(f"path <<{name}>> not found in  the main_object")
 
     def __setitem__(self, name:str, value:t.Any):
+        if isinstance(name, int):
+            name = f'n{name}'
         path = parse('$.'+name)
         path.update_or_create(self.main_object, value)
 
